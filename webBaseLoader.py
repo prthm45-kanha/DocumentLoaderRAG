@@ -10,8 +10,8 @@ load_dotenv()
 os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY", "")
 model = init_chat_model("qwen/qwen3.8-27b", model_provider="groq")
 prompt = PromptTemplate(
-    template='Write a summary for the following poem - \n {poem}',
-    input_variables=['poem']
+    template='Answer the following questions \n {question} from the following text - \n {text}',
+    input_variables=['question','text']
 )
 parser=StrOutputParser()
 
@@ -24,3 +24,6 @@ docs=loader.load()
 
 print(len(docs))
 print(docs[0].page_content)
+
+chain=prompt | model | parser
+print(chain.invoke({'question':'What is the Product that we are looking for','text':docs[0].page_content}))
