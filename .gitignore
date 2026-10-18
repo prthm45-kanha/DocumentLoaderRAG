@@ -16,3 +16,7 @@ wheels/
 
 # OS files
 .DS_Store
+chroma_db/
+ChromaVectorDB/
+TextSplitters/
+DocumentLoaders/
